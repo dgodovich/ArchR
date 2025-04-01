@@ -408,8 +408,8 @@
   o <- h5createGroup(outArrow, groupName)
 
   mData <- ArrowInfo[[groupName]]
-  cellNames <- .h5read(inArrow, "Metadata/CellNames")
-  idx <- which(cellNames %in% stringr::str_split(cellsKeep, pattern="#", simplify=TRUE)[,2])
+  cellNames <- paste0(sampleName, "#", .h5read(inArrow, "Metadata/CellNames"))
+  idx <- which(cellNames %in% cellsKeep)
   
   if(length(idx)==0){
     stop("No cells matching in arrow file!")
